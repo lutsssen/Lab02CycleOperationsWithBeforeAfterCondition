@@ -11,64 +11,32 @@
 using namespace std;
 
 int main() {
-    double constantA = 1.786;
-    double gasVolume;
-    double isothermalPressure;
-    double adiabaticPressure;
-    double degreeOfVolume = 1.2;
-    double firstMultiplyForVolume = 0.1;
-    double secondMultiplyForVolume = 0.5;
-    int endOfCycle = 11;
-    int cycleIndex = 0;
-    int middleOfCycle = 5;
-    int stepOfCycle = 1;
-    int secondStepOfCycle = 4;
+  double constantA = 1.786;
+  double gasVolume;
+  double isothermalPressure;
+  double adiabaticPressure;
+  double degreeOfVolume = 1.2;
 
-    // Цикл с предусловием
-    while (cycleIndex < endOfCycle) {
-        if (cycleIndex < middleOfCycle) {
-            gasVolume = (cycleIndex + stepOfCycle)
-                * firstMultiplyForVolume;
-        }
-        else {
-            gasVolume = (cycleIndex - secondStepOfCycle)
-                * secondMultiplyForVolume;
-        }
+  int volumeIndex = 0;
+  int endOfCycle = 11;
 
-        isothermalPressure = constantA / gasVolume;
-        adiabaticPressure = constantA / pow(gasVolume, degreeOfVolume);
-
-        cout << "While gas volume = " << gasVolume << endl
-            << "Isothermal pressure: " << isothermalPressure << endl
-            << "Adiabatic pressure: " << adiabaticPressure << endl
-            << endl;
-
-        ++cycleIndex;
+  do {
+    if (volumeIndex < 5) {
+      gasVolume = (volumeIndex + 1) * 0.1;
+    } else {
+        gasVolume = (volumeIndex - 4) * 0.5;
     }
 
-    cycleIndex = 0;
+    isothermalPressure = constantA / gasVolume;
+    adiabaticPressure = constantA / pow(gasVolume, degreeOfVolume);
 
-    // Цикл с постусловием
-    do {
-        if (cycleIndex < middleOfCycle) {
-            gasVolume = (cycleIndex + stepOfCycle)
-                * firstMultiplyForVolume;
-        }
-        else {
-            gasVolume = (cycleIndex - secondStepOfCycle)
-                * secondMultiplyForVolume;
-        }
+    cout << "Gas volume = " << gasVolume << endl
+      << "Isothermal Pressure: " << isothermalPressure << endl
+      << "Adiabatic Pressure: " << adiabaticPressure << endl
+      << endl;
 
-        isothermalPressure = constantA / gasVolume;
-        adiabaticPressure = constantA / pow(gasVolume, degreeOfVolume);
+    volumeIndex++;
+  } while (volumeIndex < endOfCycle);
 
-        cout << "Do-while gas volume = " << gasVolume << endl
-            << "Isothermal pressure: " << isothermalPressure << endl
-            << "Adiabatic pressure: " << adiabaticPressure << endl
-            << endl;
-
-        ++cycleIndex;
-    } while (cycleIndex < endOfCycle);
-
-    return 0;
+  return 0;
 }
